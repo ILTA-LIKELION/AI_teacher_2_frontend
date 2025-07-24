@@ -16,3 +16,5 @@ export type UpdateChildRequest = {
   name: string;
   grade: number;
 };
+
+export type CreateChildRequest = UpdateChildRequest;
