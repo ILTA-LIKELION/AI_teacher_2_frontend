@@ -52,7 +52,6 @@ export const useUploadImage = ({
       }
     },
     onSuccess: (res: { data: { id: number } }) => {
-      console.log(res);
       handleUploadEnd();
       const id = res.data.id;
       toast.info('문제 해설 생성이 완료되었습니다.');
@@ -69,26 +68,10 @@ export const useUploadImage = ({
         queryKey: problemListKey({ favorite: true }),
       });
     },
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['imageUpload'],
+      });
+    },
   });
-
-  // const getCroppedData = (
-  //   cropper: Cropper | undefined,
-  //   setImage: React.Dispatch<React.SetStateAction<string | undefined>>,
-  // ) => {
-  //   if (cropper) {
-  //     const croppedImage = cropper.getCroppedCanvas().toDataURL();
-  //     setImage(croppedImage);
-  //     const formData = new FormData();
-  //     cropper.getCroppedCanvas().toBlob((blob) => {
-  //       if (!blob) return;
-  //       const randomName = `image_${Date.now()}_${Math.random().toString(36).substring(2, 8)}.png`;
-  //       const file = new File([blob], randomName, { type: 'image/png' });
-  //       if (blob) formData.append('file', file);
-
-  //       mutate(formData);
-  //     });
-  //   }
-  // };
-
-  // return { getCroppedData };
 };

@@ -54,7 +54,6 @@ export default function ProblemUploadPage() {
   useEffect(() => {
     if (isLoadingRef.current) {
       history.pushState({ preventBack: true }, '', location.href);
-      console.log('현재 주소: ', location.href);
     }
 
     const onPopState = () => {
@@ -75,7 +74,6 @@ export default function ProblemUploadPage() {
   }, []);
 
   if (isLoading) {
-    console.log(isLoadingRef.current);
     return <ProblemUploadLoading />;
   }
 
